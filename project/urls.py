@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    # 'indicando home do site', incluindo a execução do arquivo urls de contact
     path('', include('contact.urls')),
     path('admin/', admin.site.urls),
 ]

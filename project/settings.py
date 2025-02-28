@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # colocando o nome do app aqui para o djando rastrear
     'contact',
 ]
 
@@ -56,6 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            # Colocando a pasta de template para o django rastrear
             BASE_DIR / 'base_templates'
         ],
         'APP_DIRS': True,
@@ -119,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# colocando a pasta de arquivos estáticos como atreável
 STATICFILES_DIRS = (
     BASE_DIR / 'base_static',
 )
