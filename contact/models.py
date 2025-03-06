@@ -18,3 +18,8 @@ class Contact(models.Model):
     # criando a data automática default= pelo metódo de timezone
     created_date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
+
+    # função que retorna na instância do obejto a string com first e last name
+    def __str__(self):
+        # esse retorno irá ser o nome do contato na adm do django
+        return f'{self.first_name} {self.last_name}'
