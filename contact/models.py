@@ -11,6 +11,11 @@ from django.utils import timezone
 
 # Criando tabela de categorias para usar como ForeignKey
 class Category(models.Model):
+    class Meta:
+        # Nome que aparece quando há uma categoria apenas
+        verbose_name = 'Category'
+        # nome que aparece quando aparecer p clicar em categorias disponíveis
+        verbose_name_plural = 'Categories'
     # única coluna que existe na tabela é name
     name = models.CharField(max_length=50)
 
