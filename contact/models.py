@@ -18,6 +18,10 @@ class Contact(models.Model):
     # criando a data automática default= pelo metódo de timezone
     created_date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
+    # campo show que começa automaticamente com True
+    show = models.BooleanField(default=True)
+    # campo para fotos que pode ser nulo e vai ser salvo com o caminho de upload_to
+    picture = models.ImageField(blank=True, upload_to='pictures/%Y/%m/')
 
     # função que retorna na instância do obejto a string com first e last name
     def __str__(self):

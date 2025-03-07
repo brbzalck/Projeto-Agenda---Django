@@ -5,6 +5,9 @@
 __pycache__
 db.sqlite3
 media
+# tirando static e media do github pois são privados
+static/
+media/
 
 # Backup files # 
 *.bak 

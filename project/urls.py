@@ -16,9 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+# importando método que carrega arquivos estáticos na URL
+from django.conf.urls.static import static
+# importando settings do projeto
+from django.conf import settings
 
 urlpatterns = [
     # 'indicando home do site', incluindo a execução do arquivo urls de contact
     path('', include('contact.urls')),
     path('admin/', admin.site.urls),
 ]
+
+# concatenando a url padrão com a pasta da media e o caminho da pasta media
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# static carrega os arquivos estaticos para o usuário final
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

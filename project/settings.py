@@ -126,6 +126,14 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     BASE_DIR / 'base_static',
 )
+# Adicionando caminho dos arquivos staticos
+STATIC_ROOT = BASE_DIR / 'static' #collectstatic
+
+# criando a pasta media para receber fotos
+MEDIA_URL = 'media/'
+# criando o caminho da pasta media
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
