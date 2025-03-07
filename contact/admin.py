@@ -21,3 +21,13 @@ class ContactAdmin(admin.ModelAdmin):
     list_editable = 'first_name', 'last_name',
     # colocando os argumentos como link de acesso ao dado
     list_display_links = 'id', 'phone',
+
+
+# Criando tabela de categorias para edição pelo django admin
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    # lista de display contem somente nome
+    list_display = 'name',
+    # ordenando por
+    ordering = '-id',
+    

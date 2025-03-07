@@ -9,7 +9,18 @@ from django.utils import timezone
 
 # id (primary_key - automático pelo django)
 
+# Criando tabela de categorias para usar como ForeignKey
+class Category(models.Model):
+    # única coluna que existe na tabela é name
+    name = models.CharField(max_length=50)
+
+    # função que retorna na instância do obejto a string com first e last name
+    def __str__(self):
+        # esse retorno irá ser o nome da categoria na adm do django
+        return self.name
+
 class Contact(models.Model):
+    ### criando colunas da tabela contact
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
@@ -22,6 +33,14 @@ class Contact(models.Model):
     show = models.BooleanField(default=True)
     # campo para fotos que pode ser nulo e vai ser salvo com o caminho de upload_to
     picture = models.ImageField(blank=True, upload_to='pictures/%Y/%m/')
+    # coluna categoria que é uma ForeignKey que vem da tabela Category
+    category = models.ForeignKey(
+        Category,
+        # qual deletar deixar nulo o vínculo
+        on_delete=models.SET_NULL,
+        # não é obrigatório e pode ser nulo para complementar on_delete
+        blank=True, null=True
+        )
 
     # função que retorna na instância do obejto a string com first e last name
     def __str__(self):
