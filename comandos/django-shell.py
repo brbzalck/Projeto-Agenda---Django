@@ -52,3 +52,14 @@ c = Contact.objects.all().order_by('-id')
 
 # para fechar o shell :)
 quit()
+
+#########################################################################################
+
+# importando a classe User do django adm
+from django.contrib.auth.models import User
+
+# Criando um usuário para a django adm
+user = User.objects.create_user(username='', password='')
+
+# deletando um user
+user.delete()

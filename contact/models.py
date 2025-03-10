@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+# importando classe User responsável pelos usuários
+from django.contrib.auth.models import User
 
 # Create your models here.
 # SEMPRE QUE TIVER ALTERAÇÕES NO MODELS ==
@@ -41,7 +43,14 @@ class Contact(models.Model):
     # coluna categoria que é uma ForeignKey que vem da tabela Category
     category = models.ForeignKey(
         Category,
-        # qual deletar deixar nulo o vínculo
+        # quando deletar deixar nulo o vínculo
+        on_delete=models.SET_NULL,
+        # não é obrigatório e pode ser nulo para complementar on_delete
+        blank=True, null=True
+        )
+    owner = models.ForeignKey(
+        User,
+        # quando deletar deixar nulo o vínculo
         on_delete=models.SET_NULL,
         # não é obrigatório e pode ser nulo para complementar on_delete
         blank=True, null=True
@@ -51,3 +60,4 @@ class Contact(models.Model):
     def __str__(self):
         # esse retorno irá ser o nome do contato na adm do django
         return f'{self.first_name} {self.last_name}'
+
