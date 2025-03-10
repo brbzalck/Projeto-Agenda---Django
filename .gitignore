@@ -8,6 +8,7 @@ media
 # tirando static e media do github pois são privados
 static/
 media/
+project/local_settings.py
 
 # Backup files # 
 *.bak 
