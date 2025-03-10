@@ -10,6 +10,9 @@
     <link rel='stylesheet' href='{% static "global/css/style.css" %}'>
 </head>
 <body>
-    <h1>Qualquer</h1>
+    {% comment %} colocando um main que encapsula conteúdo {% endcomment %}
+    <main class='content'>
+        {% block content %}{% endblock  %}
+    </main>
 </body>
 </html>

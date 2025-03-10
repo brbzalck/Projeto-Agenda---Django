@@ -1,1 +1,10 @@
 {% extends 'global/base.html' %}
+
+{% comment %} conteúdo do main {% endcomment %}
+{% block content %}
+{% comment %} para cada objeto contato no obj contacts recebido pelo contact_views {% endcomment %}
+    {% for contact in contacts %}
+    {% comment %} exiba o primeiro nome por meio de atributos do objeto contact {% endcomment %}
+        {{ contact.first_name }} <br>
+    {% endfor %}
+{% endblock content %}
