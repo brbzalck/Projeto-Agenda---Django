@@ -1,0 +1,10 @@
+<!-- Separando meu head em partials para reutilizar se for o caso com extends -->
+
+<!-- carregando os arquivos estáticos -->
+{% load static %}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ site_title }}Agenda</title>
+<!-- carregando o css que fica nos arquivos estáticos de base_statics -->
+<link rel='stylesheet' href='{% static "global/css/style.css" %}'>

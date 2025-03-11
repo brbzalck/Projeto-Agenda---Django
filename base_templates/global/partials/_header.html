@@ -1,0 +1,38 @@
+<!-- Separando meu header em partials para reutilizar se for o caso com extends -->
+
+<header class="header">
+    <h1 class="header-heading">
+        <!-- url que peago o app contact e a view de nome index e redireciona -->
+        <a href="{% url 'contact:index' %}" class="header-link">
+            Agenda
+        </a>
+    </h1>
+
+    <nav class="menu">
+        <ul class="menu-list">
+            <li class="menu-item">
+                <a href="" class="menu-link">
+                    Link 1
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="" class="menu-link">
+                    Link 1
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="search">
+        <form action="" method="get">
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Search"
+                id="search"
+                name="q"
+
+            >
+        </form>
+    </div>
+</header>
