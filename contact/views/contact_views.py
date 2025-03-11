@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from contact.models import Contact
+from django.http import Http404
 
 # view que pega a requisição index e retorna a renderização como resposta determinado html
 def index(request):
@@ -16,5 +17,27 @@ def index(request):
         request,
         'contact/index.html',
         # index retorna todos os dados de Contact para ser manipulado
+        context
+    )
+
+# criando a view contact, que recebe a "requisição" com o "contato_id" passado pela urls como parâmetro
+def contact(request, contact_id):
+    # single_contact = Contact.objects.filter(pk=contact_id).first()
+
+    # get_object tenta pegar o objeto caso contrário da 404
+    single_contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    # Pegando da tabela Contact, a pk que seja = contact_id, e que esteja com show ok
+
+    # context armazena os dados em contact para serem repassados para o template
+    context = {
+        'contact': single_contact,
+    }
+
+    # retorna a requisição, joga para o template desejado, e com o contexto para uso
+    return render(
+        request,
+        # retorna a página de contact
+        'contact/contact.html',
+        # manda os dados do contact para utilização
         context
     )

@@ -28,7 +28,10 @@
                 {% comment %} iterando um a um e adicionando na tabela {% endcomment %}
                      <tr class="table-row">
                         <td class="table-cel">
-                            <a class="table-link" href="#">
+                            {% comment %} criando o link para a view contact {% endcomment %}
+                            <a class="table-link" href="{% url "contact:contact" contact.id %}">
+                                {% comment %} colocando o id do contato na url para envio {% endcomment %}
+
                                 {% comment %} atributo id do objeto contact {% endcomment %}
                                 {{ contact.id }}
                             </a>
