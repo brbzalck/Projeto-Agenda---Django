@@ -8,7 +8,7 @@ from contact import models
 @admin.register(models.Contact)
 class ContactAdmin(admin.ModelAdmin):
     # criando classe que recebe decoretor(e recebe admin.ModelAdmin)
-    list_display = 'id', 'first_name', 'last_name', 'phone',
+    list_display = 'id', 'first_name', 'last_name', 'phone', 'show',
     # ordenando por
     ordering = '-id',
     # barra de pesquisa para os colunas determinadas
@@ -18,7 +18,7 @@ class ContactAdmin(admin.ModelAdmin):
     # max de 100 por página
     list_max_show_all = 200
     # opção do adm editar direto o argumetos da tupla
-    list_editable = 'first_name', 'last_name',
+    list_editable = 'first_name', 'last_name', 'show',
     # colocando os argumentos como link de acesso ao dado
     list_display_links = 'id', 'phone',
 

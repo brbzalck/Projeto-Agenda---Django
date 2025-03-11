@@ -4,7 +4,7 @@ from contact.models import Contact
 # view que pega a requisição index e retorna a renderização como resposta determinado html
 def index(request):
     # variável que guarda todos os dados contido em Contact
-    contacts = Contact.objects.all()
+    contacts = Contact.objects.filter(show=True).order_by('-id')
 
     # colocando os objetos coletados no dict context para fins de exportação render
     context = {
