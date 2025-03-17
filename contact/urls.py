@@ -10,6 +10,11 @@ urlpatterns = [
     path('', views.index, name='index'),
     # url requisitada pelo form, que puxa view search, de nome search
     path('search/', views.search, name='search'),
+    
+    # CONTACT CRUD
+    
     # url de endereço manda o contact_id como parâmetro, chama a view contact, com nome de url contact
     path('contact/<int:contact_id>/', views.contact, name='contact'),
+    # url de criação, que puxa a execução a view create, de nome create
+    path('contact/create/', views.create, name='create'),
 ]
