@@ -24,7 +24,8 @@
     </nav>
 
     <div class="search">
-        <form action="" method="get">
+        <!-- form que puxa a url search com método get para resgatar valores -->
+        <form action="{% url 'contact:search' %}" method="GET">
             <input 
                 type="text" 
                 class="search-input" 

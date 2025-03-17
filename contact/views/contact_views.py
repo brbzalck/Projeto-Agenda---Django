@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q
 from contact.models import Contact
 
 # view que pega a requisição index e retorna a renderização como resposta determinado html
@@ -18,6 +19,40 @@ def index(request):
         request,
         'contact/index.html',
         # index retorna todos os dados de Contact para ser manipulado
+        context,
+    )
+
+# definindo oque a view search vai fazer
+def search(request):
+    # pegando valores do método get e guardando numa variável
+    search_value = request.GET.get('q', '').strip()
+    
+    # se esse valor for vazio retorna a página inicial
+    if search_value == '':
+        return redirect('contact:index')
+
+    # pesquisando dentro da table Contact objetos que estão com show=True em determinas colunas
+    contacts = Contact.objects\
+        .filter(show=True)\
+            .filter(Q(first_name__icontains=search_value) |
+                    # utilizando a class Q para conseguir fazer a query no sql com OR representado por |
+                    Q(last_name__icontains=search_value) |
+                    Q(phone__icontains=search_value) |
+                    Q(email__icontains=search_value)
+                    )\
+                .order_by('-id')
+
+    # passando o resultado da query para o contexto e o novo título da página atual
+    context = {
+        'contacts': contacts,
+        'site_title': 'Search - '
+    }
+
+    return render(
+        request,
+        # retornando a própria view de index só que com o context específico da consulta da query search
+        'contact/index.html',
+        # contexto que retorna apenas oque o get pedir e a query retornar
         context,
     )
 
