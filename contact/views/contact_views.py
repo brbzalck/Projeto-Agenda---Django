@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
+from django.core.paginator import Paginator
+
 from contact.models import Contact
 
 # view que pega a requisição index e retorna a renderização como resposta determinado html
@@ -7,10 +9,17 @@ def index(request):
     # variável que guarda todos os dados contido em Contact
     contacts = Contact.objects.filter(show=True).order_by('-id')
 
+    # colocando uma paginação de 10 em 10 com os contatos retornados da query
+    paginator = Paginator(contacts, 10)
+    # pegando a página por meio de GET e salvando numa VAR
+    page_number = request.GET.get("page")
+    # usando a paginação de 10 em 10 para determinada página numerada
+    page_obj = paginator.get_page(page_number)
+
     # colocando os objetos coletados no dict context para fins de exportação render
     context = {
-        # esse contact pode ser iterado -> é um objeto com vários objetos
-        'contacts': contacts,
+        # passando os contatos obtidos por meio de páginas 10 em 10
+        'page_obj': page_obj,
         # passando no contexto um valor para site_title
         'site_title': 'Contatos - '
     }
@@ -41,10 +50,14 @@ def search(request):
                     Q(email__icontains=search_value)
                     )\
                 .order_by('-id')
+    
+    paginator = Paginator(contacts, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
 
     # passando o resultado da query para o contexto e o novo título da página atual
     context = {
-        'contacts': contacts,
+        'page_obj': page_obj,
         'site_title': 'Search - ',
         # passando o resultado obtido de get para o contexto para futura utilização no render
         'search_value': search_value,

@@ -1,0 +1,26 @@
+{% comment %} se existir alguma página de retorno da query {% endcomment %}
+{% if page_obj %}
+    <div class="pagination">
+        <span class="step-links">
+            {% comment %} se existir página anterior exibe first & previous {% endcomment %}
+            {% if page_obj.has_previous %}
+            {% comment %} page=1 define a primeira página de retorno da query {% endcomment %}
+                <a href="?page=1&q={{ request.GET.q.strip }}">&laquo; first</a>
+                {% comment %} &q={{ request.GET.q.strip }} garante que a busca não se perca, guardando em 'q' {% endcomment %}
+                <a href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q.strip }}">previous</a>
+                {% comment %} pega a página anterior & não deixa a busca se perder {% endcomment %}
+            {% endif %}
+
+            <span class="current">
+                {% comment %} exibi número da pág atual, e o total de páginas que faltam {% endcomment %}
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% comment %} mesma coisa que o bloco condiconal da linha 6, porêm inicial(os dois podem coabitar) {% endcomment %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q.strip }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&q={{ request.GET.q.strip }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}

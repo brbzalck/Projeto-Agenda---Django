@@ -2,8 +2,8 @@
 
 {% comment %} conteúdo do main {% endcomment %}
 {% block content %}
-{% comment %} se existir algum contato de retorno da query {% endcomment %}
-{% if contacts %}
+{% comment %} se existir alguma página de retorno da query {% endcomment %}
+{% if page_obj %}
     {% comment %} div resposiva {% endcomment %}
     <div class="responsive-table">
         {% comment %} tabela responsiva {% endcomment %}
@@ -25,8 +25,8 @@
             </thead>
 
             <tbody>
-                {% comment %} pegando todos os contatos fornecido por contact_views {% endcomment %}
-                {% for contact in contacts %}
+                {% comment %} iterando cada contato dentro das páginas de contato {% endcomment %}
+                {% for contact in page_obj %}
                 {% comment %} iterando um a um e adicionando na tabela {% endcomment %}
                      <tr class="table-row">
                         <td class="table-cel">

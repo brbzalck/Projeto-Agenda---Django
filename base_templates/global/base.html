@@ -10,6 +10,8 @@
     {% comment %} colocando um main que encapsula conteúdo {% endcomment %}
     <main class='content'>
         {% block content %}{% endblock  %}
+        {% comment %} incluindo html de paginação para buscas {% endcomment %}
+        {% include 'global/partials/_pagination.html' %}
     </main>
 </body>
 </html>
