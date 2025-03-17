@@ -45,7 +45,9 @@ def search(request):
     # passando o resultado da query para o contexto e o novo título da página atual
     context = {
         'contacts': contacts,
-        'site_title': 'Search - '
+        'site_title': 'Search - ',
+        # passando o resultado obtido de get para o contexto para futura utilização no render
+        'search_value': search_value,
     }
 
     return render(

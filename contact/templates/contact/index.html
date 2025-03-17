@@ -2,6 +2,8 @@
 
 {% comment %} conteúdo do main {% endcomment %}
 {% block content %}
+{% comment %} se existir algum contato de retorno da query {% endcomment %}
+{% if contacts %}
     {% comment %} div resposiva {% endcomment %}
     <div class="responsive-table">
         {% comment %} tabela responsiva {% endcomment %}
@@ -54,4 +56,13 @@
             </tbody>
         </table>
     </div>
+    {% comment %} se não existir nenhum contato de retorno {% endcomment %}
+    {% else %} 
+    {% comment %} exibição simples de resultado failed {% endcomment %}
+    <div class="single-contact">
+        <h1 class="single-contact-name">
+            Nenhum contato encontrado.
+        </h1>
+    </div>
+    {% endif %}
 {% endblock content %}

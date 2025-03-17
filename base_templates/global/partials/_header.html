@@ -32,8 +32,9 @@
                 placeholder="Search"
                 id="search"
                 name="q"
-
+                value="{{ request.GET.q.strip }}"
             >
+            <!-- colocando o valor do form pela própria requisição com o método GET.q=nome do input + um strip para tirar espaços das laterais  -->
         </form>
     </div>
 </header>
