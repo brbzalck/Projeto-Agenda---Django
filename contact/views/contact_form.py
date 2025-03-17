@@ -6,9 +6,22 @@ from contact.models import Contact
 
 
 def create(request):
+    # se o método for post executa isso
+    if request.method == 'POST':
+        print()
+        print(request.method)
+        print(request.POST.get('first_name'))
+        print(request.POST.get('last_name'))
+        print()
+
     context = {
 
     }
+
+    print()
+    # verificando método caso não tenha nenhum input no Send(post)
+    print(request.method)
+    print()
 
     return render(
         request,
