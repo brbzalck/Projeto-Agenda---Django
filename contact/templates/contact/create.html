@@ -6,6 +6,10 @@
         <h2>Contact</h2>
         <!-- enctype para enviar arquivos -->
         <form action="" method="POST" enctype="multipart/form-data">
+
+            {% comment %} garantindo a integridade de input dos dados {% endcomment %}
+            {% csrf_token %}
+
             <div class="form-content">
                 <div class="form-group">
                     <label for="id_first_name">LABEL</label>
