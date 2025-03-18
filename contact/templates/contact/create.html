@@ -11,17 +11,15 @@
             {% csrf_token %}
 
             <div class="form-content">
-                <div class="form-group">
-                    {% comment %} colocando input para adicionar na table Contact {% endcomment %}
-                    <label for="id_first_name">First Name</label>
-                    <input type="text" name="first_name" maxlength="255" id="id_first_name">
-                </div>
-                <div class="form-group">
-                    <label for="id_last_name">Last Name</label>
-                    <input type="text" name="last_name" maxlength="255" id="id_last_name">
-                </div>
-            </div>
-
+                {% comment %} pegando cada campo existente em form(passado por ContactForm() no context) {% endcomment %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {% comment %} settando id e nome_campo de forma dinâmica para cada campo {% endcomment %}
+                        <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
+                        {% comment %} aqui fica o input vinculado com o label de cima {% endcomment %}
+                        {{ field }}
+                    </div>
+                {% endfor %}
             <div class="form-content">
                 <div class="form-group">
                     {% comment %} envia os dados do form para o backend {% endcomment %}
