@@ -20,6 +20,12 @@
                         {{ field }}
                         <!-- Mostrando eventuais erros abaixo do input -->
                         {{ field.errors }}
+
+                        {% if field.help_text %}
+                        {% comment %} usando o help text da class ContactForm {% endcomment %}
+                            <p class="help-text">{{ field.help_text }}</p>
+                        {% endif %}
+
                     </div>
                 {% endfor %}
              <!-- Se existir error em algum form -->
