@@ -18,8 +18,22 @@
                         <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
                         {% comment %} aqui fica o input vinculado com o label de cima {% endcomment %}
                         {{ field }}
+                        <!-- Mostrando eventuais erros abaixo do input -->
+                        {{ field.errors }}
                     </div>
                 {% endfor %}
+             <!-- Se existir error em algum form -->
+            {% if form.non_field_errors %}
+                <div class="form-content">
+                    <div class="form-group">
+                        <div class="message error">
+                            <!-- exibi ele dentro desse css -->
+                        {{ form.non_field_errors }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
             <div class="form-content">
                 <div class="form-group">
                     {% comment %} envia os dados do form para o backend {% endcomment %}
