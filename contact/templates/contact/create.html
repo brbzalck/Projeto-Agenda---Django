@@ -4,8 +4,8 @@
 {% block content %}
     <div class="form-wrapper">
         <h2>Contact</h2>
-        <!-- form que chama a função view create, enctype para enviar arquivos -->
-        <form action="{% url 'contact:create' %}" method="POST" enctype="multipart/form-data">
+        <!-- form que chama a função view create/ou/post, enctype para enviar arquivos -->
+        <form action="{{ form_action }}" method="POST" enctype="multipart/form-data">
 
             {% comment %} garantindo a integridade de input dos dados {% endcomment %}
             {% csrf_token %}
