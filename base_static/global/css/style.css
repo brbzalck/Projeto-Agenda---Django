@@ -294,6 +294,7 @@
   
   .btn {
     background-color: var(--link-dark-color);
+    text-decoration: none;
     color: var(--clr-white);
     font-weight: bold;
     border: none;
@@ -312,3 +313,24 @@
     filter: brightness(80%);
     box-shadow: 0 0 5px var(--link-dark-color);
   }
+
+
+ .contact-links {
+  margin-block: calc(var(--small-font-size) * 2);
+  display: flex;
+  align-items: center;
+  gap: 0 var(--spacing);
+}
+
+.btn-link {
+  font-size: var(--small-font-size);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 1rem;
+  display: block;
+  line-height: var(--small-font-size);
+}
+
+.btn-delete {
+  background: rgb(219, 20, 20);
+}

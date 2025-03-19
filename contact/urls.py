@@ -17,6 +17,8 @@ urlpatterns = [
     path('contact/<int:contact_id>/', views.contact, name='contact'),
     # criando nova url de atualização do contato
     path('contact/<int:contact_id>/update/', views.update, name='update'),
+    # adicionando url que recebe id de deleção
+    path('contact/<int:contact_id>/delete/', views.delete, name='delete'),
     # url de criação, que puxa a execução a view create, de nome create
     path('contact/create/', views.create, name='create'),
 ]

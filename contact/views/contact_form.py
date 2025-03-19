@@ -94,3 +94,25 @@ def update(request, contact_id):
         'contact/create.html',
         context,
     )
+
+# função da view delete
+def delete(request, contact_id):
+    # tenta achar o objeto requerido primeiro
+    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+
+    # pega qual estado de confirmation
+    confirmation = request.POST.get('confirmation', 'no')
+
+    # se confirmation for yes pelas 2 etapas, exclui contato
+    if confirmation == 'yes':
+        contact.delete()
+        return redirect('contact:index')
+
+    return render(
+        request,
+        'contact/contact.html',
+        {
+            'contact': contact,
+            'confirmation': confirmation
+        }
+    )
