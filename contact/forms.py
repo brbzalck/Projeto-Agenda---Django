@@ -28,9 +28,10 @@ class ContactForm(forms.ModelForm):
     class Meta:
         # definindo qual model se trata
         model = models.Contact
-        # selecioanando as columns ta table
+        # selecioanando os atributos da model(table)
         fields = (
             'first_name', 'last_name', 'phone',
+            'email', 'description', 'category',
         )
         # widgets = {
         #     'first_name': forms.TextInput(
