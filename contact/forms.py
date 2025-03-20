@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from . import models
+from django.contrib.auth.forms import UserCreationForm
 
 # Criando form baseado no Model django
 class ContactForm(forms.ModelForm):
@@ -62,3 +63,7 @@ class ContactForm(forms.ModelForm):
 
         # método epecifico de clean_campo retorna o próprio campo para manter no form como exemplo
         return first_name
+
+# criando minha própria classe para registro de usuário
+class RegistrerForm(UserCreationForm):
+    ...

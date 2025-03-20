@@ -2,3 +2,4 @@
 from .contact_views import *
 # colocando as views criadas separadamente para iniciar com __init quando forem requisitadas
 from .contact_form import *
+from .user_forms import *

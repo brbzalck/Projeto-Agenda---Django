@@ -21,4 +21,10 @@ urlpatterns = [
     path('contact/<int:contact_id>/delete/', views.delete, name='delete'),
     # url de criação, que puxa a execução a view create, de nome create
     path('contact/create/', views.create, name='create'),
+
+    # USER
+    
+    # url de endereço manda o contact_id como parâmetro, chama a view contact, com nome de url contact
+    path('user/create/', views.register, name='register'),
+
 ]
