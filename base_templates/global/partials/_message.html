@@ -1,0 +1,8 @@
+{% if messages %}
+<!-- se tiver msg pega cada uma delas e exibi dentro do css message bunitin com tags dinâmica -->
+    {% for message in messages %}
+        <div class="message {{ message.tags }} ">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}

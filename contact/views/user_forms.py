@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from contact.forms import RegistrerForm
+from django.contrib import messages
 
 def register(request):
     # func register, pega os campos padrões de RegisterForm
@@ -11,6 +12,10 @@ def register(request):
 
         if form.is_valid():
             form.save()
+            # assim que salvar exibi mensagem de sucess na requisição de 'Usuário registrado'
+            messages.success(request, 'Usuário registrado')
+            # retorna como redirecionamento o index ao salvar enviar contato em create
+            return redirect('contact:index')
 
     # retorna como resposta de requisição, o html de register com o form de RegistrerForm
     return render(
