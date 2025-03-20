@@ -4,26 +4,17 @@ from . import models
 
 # Criando form baseado no Model django
 class ContactForm(forms.ModelForm):
-    # editando a column first_name da model com widget para atributos na label
-    first_name = forms.CharField(
-        widget=forms.TextInput(
+    # editando como quero que o campo picture fique
+    picture = forms.ImageField(
+        # permetindo upload de arquivos
+        widget=forms.FileInput(
+            # aceitando apenas imagens
             attrs={
-                'placeholder': 'Escreva aqui'
+                'accept': 'image/*'
             }
-        ),
-        label='Primeiro Nome',
-        help_text='Texto de ajuda',
+        )
     )
 
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        # pegando pelo init do contactForm o first_name e modificando com widgets
-
-        # self.fields['first_name'].widget.attrs.update({
-        #     'placeholder': 'Escreva aqui!'
-        # })
 
     class Meta:
         # definindo qual model se trata
@@ -31,15 +22,8 @@ class ContactForm(forms.ModelForm):
         # selecioanando os atributos da model(table)
         fields = (
             'first_name', 'last_name', 'phone',
-            'email', 'description', 'category',
+            'email', 'description', 'category', 'picture',
         )
-        # widgets = {
-        #     'first_name': forms.TextInput(
-        #         attrs={
-        #             'placeholder': 'Escreva aqui'
-        #         }
-        #     )
-        # }
 
     # função clean que pega os dados limpos do POST(tem acesso a tds campos do form)
     def clean(self):

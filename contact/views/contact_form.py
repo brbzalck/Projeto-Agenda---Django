@@ -9,8 +9,8 @@ def create(request):
     form_action = reverse('contact:create')
     # se o usuário entrar com dados == POST
     if request.method == 'POST':
-        # salvando os dados obtidos pelo POST
-        form = ContactForm(request.POST)
+        # salvando os dados obtidos pelo POST e os arquivos
+        form = ContactForm(request.POST, request.FILES)
         # enviando para o context os dados obtidos de POST
         context = {
             # form preenchido
@@ -56,7 +56,9 @@ def update(request, contact_id):
     # se o usuário entrar com dados == POST
     if request.method == 'POST':
         # atualizando com instance=contact, os novos dados vindo do POST no ID certo
-        form = ContactForm(request.POST, instance=contact)
+        form = ContactForm(request.POST, request.FILES, instance=contact)
+        # colocando arquivos dentro do form para manipulação
+
         # enviando para o context os dados obtidos de POST
         context = {
             # form preenchido

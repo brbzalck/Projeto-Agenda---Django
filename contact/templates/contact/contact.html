@@ -18,6 +18,13 @@
         <!-- selecionando qual campo exatamente trazer da forgeinKey -->
         <p><b>Category:</b> {{ contact.category.name }} </p>
         
+        {% comment %} se existir picture no contato vai exibir no cartão de contato {% endcomment %}
+        {% if contact.picture %}
+            <p>
+                <img src="{{ contact.picture.url }}" alt="{{ contact.first_name }} {{ contact.last_name }}">
+            </p>
+        {% endif %}
+
         <div class="contact-links">
             <!-- Link que redireciona para atulizar contato, com o id do contato -->
             <a class="btn btn-link" href="{% url 'contact:update' contact.id %}">Update</a>

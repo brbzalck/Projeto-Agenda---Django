@@ -25,8 +25,16 @@
                         {% comment %} usando o help text da class ContactForm {% endcomment %}
                             <p class="help-text">{{ field.help_text }}</p>
                         {% endif %}
-
                     </div>
+                    <!-- condicional que verifica se existe picture e URL para exibir  -->
+                        {% if field.name == 'picture' and field.value.url %}
+                            <div class="form-group">
+                                <!-- pegando a url do campo e atribuindo a IMG -->
+                                <img src="{{ field.value.url }}" alt="">
+                            </div>
+                        {% endif %}
+
+                    
                 {% endfor %}
              <!-- Se existir error em algum form -->
             {% if form.non_field_errors %}
