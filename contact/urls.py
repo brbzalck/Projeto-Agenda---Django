@@ -24,7 +24,7 @@ urlpatterns = [
 
     # USER
     
-    # url de endereço manda o contact_id como parâmetro, chama a view contact, com nome de url contact
+    # url para criação de usuário que puxa a view register
     path('user/create/', views.register, name='register'),
 
 ]
