@@ -26,5 +26,8 @@ urlpatterns = [
     
     # url para criação de usuário que puxa a view register
     path('user/create/', views.register, name='register'),
+    # url para login, view que puxa a func login_view, de nome login
+    path('user/login/', views.login_view, name='login'),
+    path('user/logout/', views.logout_view, name='logout'),
 
 ]

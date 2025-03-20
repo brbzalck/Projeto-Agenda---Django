@@ -1,0 +1,20 @@
+{% extends "global/base.html" %}
+{% comment %} extendendo a base do site para a view create {% endcomment %}
+
+{% block content %}
+    <div class="form-wrapper">
+        <h2>Login</h2>
+        
+        {% comment %} verifica se user que veio do context está autenticado {% endcomment %}
+        {% if user.is_authenticated %}
+        {% comment %} acessando o nome de user vindo do context {% endcomment %}
+            <p>Você fez login como {{ user.username }}.
+                {% comment %} requisitando a view de logout {% endcomment %}
+                Clique <a href="{% url "contact:logout" %}">aqui</a> para sair.    
+            </p>
+        {% else %}
+            {% include "contact/partials/_user-form.html" %}
+        {% endif %}
+
+    </div>
+{% endblock content %}
