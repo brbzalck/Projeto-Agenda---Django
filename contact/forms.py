@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from . import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import password_validation
 
 # Criando form baseado no Model django
 class ContactForm(forms.ModelForm):
@@ -91,7 +92,6 @@ class RegistrerForm(UserCreationForm):
     def clean_email(self):
         # pegando o campo email preenchido no formulário
         email = self.cleaned_data.get('email')
-
         # se em usuários com filtro de email=email já existir determinado email
         if User.objects.filter(email=email).exists():
             # sobe erro para o usuário
@@ -101,3 +101,74 @@ class RegistrerForm(UserCreationForm):
                 # com essa mensagem e código
                 ValidationError('Já existe este e-mail', code='invalid')
             )
+        return email
+
+# personalizando meu form de atualização de usuário
+class RegisterUpdateForm(forms.ModelForm):
+    # personalizando campo de first_name
+    first_name = forms.CharField(
+        min_length=2,
+        max_length=30,
+        required=True,
+        help_text='Required.',
+        error_messages={
+            'min_length': 'Please, add more than 2 letters.'
+        }
+    )
+    last_name = forms.CharField(
+        min_length=2,
+        max_length=30,
+        required=True,
+        help_text='Required.'
+    )
+    # personalizando campo de senha1
+    password1 = forms.CharField(
+        label="Password",
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+        help_text=password_validation.password_validators_help_text_html(),
+        required=False,
+    )
+ 
+    password2 = forms.CharField(
+        label="Password 2",
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+        help_text='Use the same password as before.',
+        required=False,
+    )   
+     
+    class Meta:
+        model = User
+        fields = (
+            'first_name', 'last_name', 'email',
+            'username',
+        )
+
+    # função de atualizar/validar email
+    def clean_email(self):
+        # pegando qual email existe no form(POST)
+        email = self.cleaned_data.get('email')
+        # pegando qual email existe na base de dados
+        current_email = self.instance.email
+
+        # se um for diferente do outro é pq o user quer atualizar
+        if current_email != email:
+            # se já existe um email igual na base de dados levanta erro
+            if User.objects.filter(email=email).exists():
+                self.add_error(
+                    'email',
+                    ValidationError('Já existe este e-mail', code='invalid')
+                )
+        # retorna qual email irá manter no formulário
+        return email
+
+    def clean_password(self):
+        password1 = self.cleaned_data.get('password1')
+
+        if password1:
+            try:
+                password_validation.validate_password(password1)
+            except ValidationError:
+                ...
+        return password1

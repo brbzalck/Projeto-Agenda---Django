@@ -29,5 +29,7 @@ urlpatterns = [
     # url para login, view que puxa a func login_view, de nome login
     path('user/login/', views.login_view, name='login'),
     path('user/logout/', views.logout_view, name='logout'),
+    # url de update user, puxa a view user_update, de nome user_update
+    path('user/update/', views.user_update, name='user_update'),
 
 ]
