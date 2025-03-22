@@ -1,0 +1,11 @@
+{% extends "global/base.html" %}
+{% comment %} extendendo a base do site para a view create {% endcomment %}
+
+{% block content %}
+    <div class="form-wrapper">
+        <h2>Update User</h2>
+        
+        {% include "contact/partials/_user-form.html" %}
+
+    </div>
+{% endblock content %}

@@ -37,7 +37,7 @@ def user_update(request):
         # retorna como resposta de requisição, o html de register com o form de RegistrerUpdateForm
         return render(
             request,
-            'contact/register.html',
+            'contact/user_update.html',
             {
                 'form': form
             }
@@ -51,7 +51,7 @@ def user_update(request):
         # retorna como resposta de requisição, o html de register com o form de RegistrerUpdateForm
         return render(
             request,
-            'contact/register.html',
+            'contact/user_update.html',
             {
                 'form': form
             }
@@ -59,14 +59,8 @@ def user_update(request):
     
     # salva os dados no banco de dados
     form.save()
-    # retorna como resposta de requisição, o html de register com o form de RegistrerUpdateForm
-    return render(
-        request,
-        'contact/register.html',
-        {
-            'form': form
-        }
-    )
+    # retorna como resposta de requisição a própria view de update
+    return redirect('contact:user_update')
 
 # view de login
 def login_view(request):

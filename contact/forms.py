@@ -145,6 +145,45 @@ class RegisterUpdateForm(forms.ModelForm):
             'username',
         )
 
+    # save criptografa a senha antes de salvar no banco
+    def save(self, commit=True):
+        # pegando os dados do formulário
+        cleaned_data = self.cleaned_data
+        # cria o usuário, MAS não salva no banco ainda
+        user = super().save(commit=False)
+
+        # pega a password1
+        password = cleaned_data.get('password1')
+
+        # se houver senha, criptografa e define a senha
+        if password:
+            user.set_password(password)
+
+        # se commit for True salva no banco de dados
+        if commit:
+            user.save()
+        
+        # retorna o user atualizado
+        return user
+
+    # clean verifica se as senhas são iguais ou não
+    def clean(self):
+        # pegando as duas senhas do form
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+
+        # se existir uma das duas
+        if password1 or password2:
+            # e se uma delas for diferente uma da outra
+            if password1 != password2:
+                # levanta erro
+                self.add_error(
+                    'password2',
+                    ValidationError('Senhas diferentes')
+                )
+        # passando das tratativas, retorna os dados validados :)s
+        return super().clean()
+
     # função de atualizar/validar email
     def clean_email(self):
         # pegando qual email existe no form(POST)
@@ -163,12 +202,20 @@ class RegisterUpdateForm(forms.ModelForm):
         # retorna qual email irá manter no formulário
         return email
 
-    def clean_password(self):
+    def clean_password1(self):
+        # pega a os dados digitados no campo pass1
         password1 = self.cleaned_data.get('password1')
 
+        #  se a pass1 existir
         if password1:
+            # tenta verificar se é valido a senha
             try:
                 password_validation.validate_password(password1)
-            except ValidationError:
-                ...
+            # se não for, levanta erro no campo pass1
+            except ValidationError as errors:
+                self.add_error(
+                    'password1',
+                    ValidationError(errors)
+                )
+        # retorn a senha válida ou inválida ao user(com erros ou sem erros)
         return password1
