@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from contact.forms import ContactForm
 from django.urls import reverse
 from contact.models import Contact
+from django.contrib.auth.decorators import login_required
 
 # função de requisição que renderiza a criação de contatos
+# so poderá criar contatos se estiver logado
+@login_required(login_url='contact:login')
 def create(request):
     # armazena a URL que iremos mandar o formulário
     form_action = reverse('contact:create')
@@ -47,7 +50,8 @@ def create(request):
         context,
     )
 
-
+# decorater que só exibe a view se o user estiver logado
+@login_required(login_url='contact:login')
 def update(request, contact_id):
     # pegando o contato da table Contact, onde a pk é igual ao id recebido pelo redirect de create
     contact = get_object_or_404(Contact, pk=contact_id, show=True)
@@ -98,6 +102,8 @@ def update(request, contact_id):
     )
 
 # função da view delete
+# decorater que só exibe a view se o user estiver logado
+@login_required(login_url='contact:login')
 def delete(request, contact_id):
     # tenta achar o objeto requerido primeiro
     contact = get_object_or_404(Contact, pk=contact_id, show=True)

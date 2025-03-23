@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from contact.forms import RegistrerForm, RegisterUpdateForm
 from django.contrib import messages, auth
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     # func register, pega os campos padrões de RegisterForm
@@ -28,6 +29,8 @@ def register(request):
     )
 
 # view de atualização de usuários
+# decorater que só exibe a view se o user estiver logado
+@login_required(login_url='contact:login')
 def user_update(request):
     # criando o formulário que é auto-preenchido com os dados do usuário logado
     form = RegisterUpdateForm(instance=request.user)
@@ -96,6 +99,8 @@ def login_view(request):
     )
 
 # função de logout
+# decorater que só exibe a view se o user estiver logado
+@login_required(login_url='contact:login')
 def logout_view(request):
     # desloga o usuário autenticado atualmente
     auth.logout(request)
