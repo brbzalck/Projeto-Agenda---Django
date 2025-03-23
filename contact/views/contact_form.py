@@ -23,8 +23,12 @@ def create(request):
         }
         # se o formulário estiver válido
         if form.is_valid():
-            # salva na base de dados
-            contact = form.save()
+            # cria o contato, mas não salva ainda na base da dados
+            contact = form.save(commit=False)
+            # atribuindo proprietário de criação do contato
+            contact.owner = request.user
+            # por fim salvando
+            contact.save()
             # e redireciona para a view update, com id resgatado de Contact
             return redirect('contact:update', contact_id=contact.pk)
 
@@ -54,7 +58,9 @@ def create(request):
 @login_required(login_url='contact:login')
 def update(request, contact_id):
     # pegando o contato da table Contact, onde a pk é igual ao id recebido pelo redirect de create
-    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    contact = get_object_or_404(Contact, pk=contact_id, show=True, owner=request.user)
+    # colocando proprietário requisitado para atualizar o contato
+
     # salvando URL de destino do form, com contato selecionado para atualização
     form_action = reverse('contact:update', args=(contact_id,))
     # se o usuário entrar com dados == POST
@@ -106,7 +112,8 @@ def update(request, contact_id):
 @login_required(login_url='contact:login')
 def delete(request, contact_id):
     # tenta achar o objeto requerido primeiro
-    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    contact = get_object_or_404(Contact, pk=contact_id, show=True, owner=request.user)
+    # colocando proprietário requisitado para deleção de contato
 
     # pega qual estado de confirmation
     confirmation = request.POST.get('confirmation', 'no')
