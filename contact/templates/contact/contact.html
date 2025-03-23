@@ -25,25 +25,28 @@
             </p>
         {% endif %}
 
-        <div class="contact-links">
-            <!-- Link que redireciona para atulizar contato, com o id do contato -->
-            <a class="btn btn-link" href="{% url 'contact:update' contact.id %}">Update</a>
+        {% comment %} só exibi buttons de update/delete/confirma se o usuário for proprietário do contato {% endcomment %}
+        {% if user == contact.owner %}
+            <div class="contact-links">
+                <!-- Link que redireciona para atulizar contato, com o id do contato -->
+                <a class="btn btn-link" href="{% url 'contact:update' contact.id %}">Update</a>
 
-            <!-- formulário de deleção do contato, com o id do contato no método POST(sigilo) -->
-            <form action="{% url 'contact:delete' contact.id %}" method="POST">
-                <!-- deixando seguro a entrada de dados -->
-                {% csrf_token %}
+                <!-- formulário de deleção do contato, com o id do contato no método POST(sigilo) -->
+                <form action="{% url 'contact:delete' contact.id %}" method="POST">
+                    <!-- deixando seguro a entrada de dados -->
+                    {% csrf_token %}
 
-                {% if confirmation == 'no' %}
-                    <!-- input troca o valor de confirmation para confirmação de 2 etapas -->
-                    <input type="hidden" name="confirmation" value="yes">
-                    <button class="btn btn-link btn-delete" type="submit">Confirma?</button>
-                {% else %}
-                    <!-- exibindo botão de delete natural, quando clicar confirmation == no -->
-                    <button class="btn btn-link btn-delete" type="submit">Delete</button>
-                {% endif %}
-            </form>
-        </div>
+                    {% if confirmation == 'no' %}
+                        <!-- input troca o valor de confirmation para confirmação de 2 etapas -->
+                        <input type="hidden" name="confirmation" value="yes">
+                        <button class="btn btn-link btn-delete" type="submit">Confirma?</button>
+                    {% else %}
+                        <!-- exibindo botão de delete natural, quando clicar confirmation == no -->
+                        <button class="btn btn-link btn-delete" type="submit">Delete</button>
+                    {% endif %}
+                </form>
+            </div>
+        {% endif %}
 
     </div>
 {% endblock content %}

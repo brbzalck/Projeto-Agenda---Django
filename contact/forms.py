@@ -15,7 +15,9 @@ class ContactForm(forms.ModelForm):
             attrs={
                 'accept': 'image/*'
             }
-        )
+        ),
+        # não é obrigatório input de imagem na criação de contato
+        required=False
     )
 
 
