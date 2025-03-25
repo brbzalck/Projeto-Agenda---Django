@@ -44,3 +44,8 @@ Git e GitHub
     - python manage.py runserver
 
 Agora, acesse no navegador: http://127.0.0.1:8000/
+
+
+📌 Se você gostou do projeto, deixe uma ⭐ no repositório!
+
+🔗 Meu LinkedIn: Seu Perfil
