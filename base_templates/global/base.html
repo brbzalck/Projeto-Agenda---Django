@@ -14,5 +14,23 @@
         {% comment %} incluindo html de paginação para buscas {% endcomment %}
         {% include 'global/partials/_pagination.html' %}
     </main>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const rows = document.querySelectorAll(".table-row");
+  
+      rows.forEach(row => {
+        row.addEventListener("click", () => {
+          const url = row.getAttribute("data-href");
+          if (url) {
+            window.location.href = url;
+          }
+        });
+  
+        // Muda o cursor ao passar por cima
+        row.style.cursor = "pointer";
+      });
+    });
+  </script>
 </body>
 </html>

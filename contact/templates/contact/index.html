@@ -28,15 +28,14 @@
                 {% comment %} iterando cada contato dentro das páginas de contato {% endcomment %}
                 {% for contact in page_obj %}
                 {% comment %} iterando um a um e adicionando na tabela {% endcomment %}
-                     <tr class="table-row">
-                        <td class="table-cel">
-                            {% comment %} criando o link para a view contact {% endcomment %}
-                            <a class="table-link" href="{% url "contact:contact" contact.id %}">
-                                {% comment %} colocando o id do contato na url para envio {% endcomment %}
 
-                                {% comment %} atributo id do objeto contact {% endcomment %}
-                                {{ contact.id }}
-                            </a>
+                    {% comment %} criando o link para a view contact {% endcomment %}
+                     <tr class="table-row" data-href="{% url 'contact:contact' contact.id %}">
+                        {% comment %} colocando o id do contato na url para envio {% endcomment %}
+                        
+                        <td class="table-cel">
+                            {% comment %} atributo id do objeto contact {% endcomment %}
+                            {{ contact.id }}
                         </td>
                         <td class="table-cel">
                             {% comment %} preenchendo o resto dos atributos nos cabeçalhos {% endcomment %}
