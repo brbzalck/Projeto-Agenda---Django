@@ -27,7 +27,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-# concatenando a url padrão com a pasta da media e o caminho da pasta media
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-# static carrega os arquivos estaticos para o usuário final
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+else:
+    # Render não serve media automaticamente, então incluímos isso em produção
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
