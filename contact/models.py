@@ -39,7 +39,7 @@ class Contact(models.Model):
     # campo show que começa automaticamente com True
     show = models.BooleanField(default=True)
     # campo para fotos que pode ser nulo e vai ser salvo com o caminho de upload_to
-    picture = models.ImageField(blank=True, upload_to='pictures/%Y/%m/')
+    picture = models.ImageField(blank=True, upload_to='pictures/')
     # coluna categoria que é uma ForeignKey que vem da tabela Category
     category = models.ForeignKey(
         Category,
