@@ -10,6 +10,15 @@ static/
 media/
 project/local_settings.py
 
+!media/pictures/img-1
+!media/pictures/img-2
+!media/pictures/img-3
+!media/pictures/img-4
+!media/pictures/img-5
+!media/pictures/img-6
+!media/pictures/img-7
+
+
 # Backup files # 
 *.bak 
 
