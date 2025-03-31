@@ -10,6 +10,7 @@ static/
 media/
 project/local_settings.py
 
+!media/pictures/
 !media/pictures/img-1.jpeg
 !media/pictures/img-2.jpeg
 !media/pictures/img-3.jpeg
